@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Img, ButtonPosition } from "./styles";
 import SidebarButton from "./sidebarButton";
 import {
@@ -9,11 +9,20 @@ import {
   MdLibraryAdd,
   MdSpaceDashboard,
 } from "react-icons/all";
+import apiClient from "../../spotify";
 
 const Sidebar = () => {
+  const [image, setImage] = useState(
+    "https://upload.wikimedia.org/wikipedia/commons/9/9a/Gull_portrait_ca_usa.jpg"
+  );
+  useEffect(() => {
+    apiClient.get("me").then((response) => {
+      setImage(response.data.image[0].url);
+    });
+  });
   return (
     <Container>
-      <Img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Gull_portrait_ca_usa.jpg" />
+      <Img src={image} />
       <ButtonPosition>
         <SidebarButton title="Feed" to="/feed" icon={<MdSpaceDashboard />} />
         <SidebarButton title="Trending" to="/trending" icon={<FaGripfire />} />

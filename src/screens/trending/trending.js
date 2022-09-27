@@ -1,10 +1,9 @@
 import React from 'react';
+import {Container} from "./styles";
 
 const Trending = () => {
     return (
-        <div>
-            
-        </div>
+        <Container></Container>
     );
 };
 
